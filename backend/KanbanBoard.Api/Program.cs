@@ -18,7 +18,7 @@ app.UseHttpsRedirection();
 app.MapGet("/", () => Results.Ok(new
 {
     status = "healthy",
-    message = "Kanban Board API is running",
+    message = "API is running",
     timestamp = DateTime.UtcNow
 }))
 .WithName("HealthCheck");
