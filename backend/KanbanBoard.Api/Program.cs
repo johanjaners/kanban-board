@@ -46,5 +46,16 @@ app.MapGet("/tasks-count", async (AppDbContext db) =>
     }
 });
 
+// debug
+app.MapGet("/config-check", (IConfiguration config) =>
+{
+    var cs = config.GetConnectionString("DefaultConnection");
+    return Results.Ok(new
+    {
+        hasConnectionString = !string.IsNullOrWhiteSpace(cs),
+        length = cs?.Length ?? 0
+    });
+});
+
 
 app.Run();
