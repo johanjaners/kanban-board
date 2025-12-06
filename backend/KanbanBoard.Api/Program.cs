@@ -32,8 +32,19 @@ app.MapGet("/", () => Results.Ok(new
 // DB endpoint
 app.MapGet("/tasks-count", async (AppDbContext db) =>
 {
-    var count = await db.Tasks.CountAsync();
-    return Results.Ok(new { count });
+    try
+    {
+        var count = await db.Tasks.CountAsync();
+        return Results.Ok(new { count });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            title: "DB error on tasks-count",
+            detail: ex.Message
+        );
+    }
 });
+
 
 app.Run();
