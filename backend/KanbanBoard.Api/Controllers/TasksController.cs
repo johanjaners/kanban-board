@@ -38,4 +38,25 @@ public class TasksController(AppDbContext db) : ControllerBase
         var count = await _db.Tasks.CountAsync();
         return Ok(new { count });
     }
+
+    // POST: api/tasks
+    [HttpPost]
+    public async Task<ActionResult<TaskItem>> Create([FromBody] TaskCreateDto dto)
+    {
+        var task = new TaskItem
+        {
+            Title = dto.Title,
+            Description = dto.Description,
+            Status = dto.Status,
+            Priority = dto.Priority,
+            DueDate = dto.DueDate,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        _db.Tasks.Add(task);
+        await _db.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+    }
 }
