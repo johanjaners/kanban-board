@@ -11,6 +11,7 @@ public class TasksController(AppDbContext db) : ControllerBase
 {
     private readonly AppDbContext _db = db;
 
+    // GET: api/tasks
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
     {
@@ -19,6 +20,15 @@ public class TasksController(AppDbContext db) : ControllerBase
             .ToListAsync();
 
         return Ok(tasks);
+    }
+
+    // GET: api/tasks/{id}
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<TaskItem>> GetById(int id)
+    {
+        var task = await _db.Tasks.FindAsync(id);
+        if (task is null) return NotFound();
+        return Ok(task);
     }
 
 }
