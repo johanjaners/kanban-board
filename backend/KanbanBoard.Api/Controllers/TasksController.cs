@@ -59,4 +59,22 @@ public class TasksController(AppDbContext db) : ControllerBase
 
         return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
     }
+
+    // PUT: api/tasks/{id}
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TaskItem>> Update(int id, [FromBody] TaskUpdateDto dto)
+    {
+        var task = await _db.Tasks.FindAsync(id);
+        if (task is null) return NotFound();
+
+        task.Title = dto.Title;
+        task.Description = dto.Description;
+        task.Status = dto.Status;
+        task.Priority = dto.Priority;
+        task.DueDate = dto.DueDate;
+        task.UpdatedAt = DateTime.UtcNow;
+
+        await _db.SaveChangesAsync();
+        return Ok(task);
+    }
 }
