@@ -31,4 +31,11 @@ public class TasksController(AppDbContext db) : ControllerBase
         return Ok(task);
     }
 
+    // GET: api/tasks/count
+    [HttpGet("count")]
+    public async Task<ActionResult<object>> GetCount()
+    {
+        var count = await _db.Tasks.CountAsync();
+        return Ok(new { count });
+    }
 }
