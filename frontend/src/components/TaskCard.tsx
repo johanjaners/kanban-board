@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import type { TaskItem } from '../services/api';
 
 type TaskCardProps = {
