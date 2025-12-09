@@ -12,25 +12,25 @@ type ColumnProps = {
 export function Column({ title, tasks, status, onStatusChange, onDelete }: ColumnProps) {
   const filteredTasks = tasks.filter(task => task.status === status);
 
-  const getColumnColor = () => {
+  const getHeaderColor = () => {
     switch (status) {
-      case 0: return 'bg-blue-50 border-blue-200';
-      case 1: return 'bg-yellow-50 border-yellow-200';
-      case 2: return 'bg-green-50 border-green-200';
-      default: return 'bg-gray-50 border-gray-200';
+      case 0: return 'bg-blue-500';
+      case 1: return 'bg-yellow-500';
+      case 2: return 'bg-green-500';
+      default: return 'bg-gray-500';
     }
   };
 
   return (
-    <div className={`rounded-lg border-2 p-4 ${getColumnColor()}`}>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">{title}</h2>
-        <span className="bg-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div className="rounded-lg bg-gray-300">
+      <div className={`${getHeaderColor()} rounded-t-lg px-4 py-3 flex justify-between items-center`}>
+        <h2 className="text-lg font-bold text-white">{title}</h2>
+        <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold text-white">
           {filteredTasks.length}
         </span>
       </div>
       
-      <div className="space-y-3">
+      <div className="p-4 space-y-3">
         {filteredTasks.length === 0 ? (
           <p className="text-gray-400 text-center py-8">No tasks</p>
         ) : (
