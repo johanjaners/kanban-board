@@ -58,11 +58,11 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         <p className="text-sm text-gray-600 mb-3">{task.description}</p>
       )}
       
-      <div className="flex gap-2 items-stretch mb-3">
+      <div className="flex flex-wrap gap-2 items-stretch mb-3">
         <select
           value={task.status}
           onChange={(e) => onStatusChange(task.id, Number(e.target.value))}
-          className="flex-1 text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 min-w-[140px] text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value={0}>Todo</option>
           <option value={1}>In Progress</option>
@@ -71,7 +71,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         
         {task.priority && (
           <span 
-            className="px-3 rounded border border-gray-300 bg-white text-gray-800 font-medium text-sm flex items-center"
+            className="px-3 rounded border border-gray-300 bg-white text-gray-800 font-medium text-sm flex items-center whitespace-nowrap"
             style={{ borderLeft: `4px solid ${priorityInfo.color}` }}
           >
             {priorityInfo.text}
@@ -79,7 +79,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         )}
       </div>
       
-      <div className="flex gap-2 items-center text-xs">{task.dueDate && (
+      <div className="flex gap-2 items-center text-sm">{task.dueDate && (
           <span className="text-gray-600">📅 {formatDate(task.dueDate)}</span>
         )}
       </div>
