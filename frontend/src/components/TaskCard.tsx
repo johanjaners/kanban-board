@@ -83,14 +83,29 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         )}
       </div>
 
-      <button
-        onClick={() => onDelete(task.id)}
-        className="absolute bottom-2 right-2 text-gray-400 hover:text-red-500 text-sm transition-colors"
-        aria-label="Delete task"
-        title="Delete task"
-      >
-        🗑️
-      </button>
+      <div className="absolute top-2 right-2" ref={menuRef}>
+        <button
+          onClick={() => setShowMenu(!showMenu)}
+          className="text-gray-400 hover:text-gray-600 text-lg transition-colors"
+          aria-label="Menu"
+        >
+          ⋯
+        </button>
+        
+        {showMenu && (
+          <div className="absolute right-0 mt-1 bg-white border border-gray-300 rounded shadow-lg z-10">
+            <button
+              onClick={() => {
+                onDelete(task.id);
+                setShowMenu(false);
+              }}
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
