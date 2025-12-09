@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
 import { api, type TaskItem } from './services/api';
 import { Board } from './components/Board';
+import { TaskForm } from './components/TaskForm';
 import './App.css';
 
 function App() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchTasks = () => {
+    setLoading(true);
     api.getTasks()
       .then(setTasks)
       .catch(console.error)
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   if (loading) {
@@ -28,10 +34,15 @@ function App() {
         <h1 className="text-4xl font-bold mb-2 text-gray-800">Kanban Board</h1>
         <p className="mb-6 text-gray-600">Connected to Azure API ✅</p>
         
+        <div className="mb-6">
+          <TaskForm onTaskCreated={fetchTasks} />
+        </div>
+
         <Board tasks={tasks} />
       </div>
     </div>
-  );
+  );  
+
 }
 
 export default App;
