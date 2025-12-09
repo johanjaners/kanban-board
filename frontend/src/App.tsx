@@ -68,7 +68,6 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-2 text-gray-800">Kanban Board</h1>
-        <p className="mb-6 text-gray-600">Connected to Azure API ✅</p>
         
         <div className="mb-6">
           <TaskForm onTaskCreated={fetchTasks} />
