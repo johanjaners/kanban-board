@@ -67,7 +67,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2 text-gray-800">Kanban Board</h1>
+        <h1 className="text-4xl font-bold mb-6 text-gray-800 text-left">Kanban Board</h1>
         
         <div className="mb-6">
           <TaskForm onTaskCreated={fetchTasks} />
