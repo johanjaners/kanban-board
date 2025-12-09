@@ -5,9 +5,10 @@ type ColumnProps = {
   title: string;
   tasks: TaskItem[];
   status: number;
+  onStatusChange: (taskId: number, newStatus: number) => void;
 };
 
-export function Column({ title, tasks, status }: ColumnProps) {
+export function Column({ title, tasks, status, onStatusChange }: ColumnProps) {
   const filteredTasks = tasks.filter(task => task.status === status);
 
   const getColumnColor = () => {
@@ -33,7 +34,11 @@ export function Column({ title, tasks, status }: ColumnProps) {
           <p className="text-gray-400 text-center py-8">No tasks</p>
         ) : (
           filteredTasks.map(task => (
-            <TaskCard key={task.id} task={task} />
+            <TaskCard 
+              key={task.id} 
+              task={task}
+              onStatusChange={onStatusChange}
+            />
           ))
         )}
       </div>
