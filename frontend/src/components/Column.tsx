@@ -6,9 +6,10 @@ type ColumnProps = {
   tasks: TaskItem[];
   status: number;
   onStatusChange: (taskId: number, newStatus: number) => void;
+  onDelete: (taskId: number) => void;
 };
 
-export function Column({ title, tasks, status, onStatusChange }: ColumnProps) {
+export function Column({ title, tasks, status, onStatusChange, onDelete }: ColumnProps) {
   const filteredTasks = tasks.filter(task => task.status === status);
 
   const getColumnColor = () => {
@@ -38,6 +39,7 @@ export function Column({ title, tasks, status, onStatusChange }: ColumnProps) {
               key={task.id} 
               task={task}
               onStatusChange={onStatusChange}
+              onDelete={onDelete}
             />
           ))
         )}
