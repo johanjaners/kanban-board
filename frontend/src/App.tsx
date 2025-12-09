@@ -16,6 +16,27 @@ function App() {
       .finally(() => setLoading(false));
   };
 
+  const handleStatusChange = async (taskId: number, newStatus: number) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    try {
+      await api.updateTask(taskId, {
+        title: task.title,
+        description: task.description,
+        status: newStatus,
+        priority: task.priority,
+        dueDate: task.dueDate,
+      });
+      
+      // Refresh tasks after update
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to update task status:', error);
+      alert('Failed to update task status');
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -38,7 +59,7 @@ function App() {
           <TaskForm onTaskCreated={fetchTasks} />
         </div>
 
-        <Board tasks={tasks} />
+        <Board tasks={tasks} onStatusChange={handleStatusChange} />
       </div>
     </div>
   );  
