@@ -3,9 +3,10 @@ import type { TaskItem } from '../services/api';
 type TaskCardProps = {
   task: TaskItem;
   onStatusChange: (taskId: number, newStatus: number) => void;
+  onDelete: (taskId: number) => void;
 };
 
-export function TaskCard({ task, onStatusChange }: TaskCardProps) {
+export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
   const getPriorityColor = (priority?: number) => {
     if (!priority) return 'bg-gray-100';
     if (priority <= 2) return 'bg-green-100';
@@ -47,6 +48,13 @@ export function TaskCard({ task, onStatusChange }: TaskCardProps) {
           <span>Due: {formatDate(task.dueDate)}</span>
         )}
       </div>
+
+      <button
+        onClick={() => onDelete(task.id)}
+        className="mt-3 w-full text-sm text-red-600 hover:text-red-800 hover:bg-red-50 py-1 px-2 rounded transition-colors"
+      >
+        Delete
+      </button>
     </div>
   );
 }
