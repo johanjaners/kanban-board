@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api, type TaskItem } from './services/api';
+import { Board } from './components/Board';
 import './App.css';
 
 function App() {
@@ -23,11 +24,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold mb-4">Kanban Board</h1>
-      <p className="mb-4 text-gray-600">Connected to Azure API ✅</p>
-      <div className="bg-white p-4 rounded shadow">
-        <h2 className="font-semibold mb-2">Tasks from API:</h2>
-        <pre className="text-sm overflow-auto">{JSON.stringify(tasks, null, 2)}</pre>
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold mb-2 text-gray-800">Kanban Board</h1>
+        <p className="mb-6 text-gray-600">Connected to Azure API ✅</p>
+        
+        <Board tasks={tasks} />
       </div>
     </div>
   );
