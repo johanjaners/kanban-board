@@ -2,9 +2,10 @@ import type { TaskItem } from '../services/api';
 
 type TaskCardProps = {
   task: TaskItem;
+  onStatusChange: (taskId: number, newStatus: number) => void;
 };
 
-export function TaskCard({ task }: TaskCardProps) {
+export function TaskCard({ task, onStatusChange }: TaskCardProps) {
   const getPriorityColor = (priority?: number) => {
     if (!priority) return 'bg-gray-100';
     if (priority <= 2) return 'bg-green-100';
@@ -24,6 +25,19 @@ export function TaskCard({ task }: TaskCardProps) {
       {task.description && (
         <p className="text-sm text-gray-600 mb-3">{task.description}</p>
       )}
+      
+      <div className="mb-3">
+        <label className="text-xs text-gray-600 block mb-1">Status:</label>
+        <select
+          value={task.status}
+          onChange={(e) => onStatusChange(task.id, Number(e.target.value))}
+          className="w-full text-sm border border-gray-300 rounded px-2 py-1 bg-white"
+        >
+          <option value={0}>📋 Todo</option>
+          <option value={1}>🔄 In Progress</option>
+          <option value={2}>✅ Done</option>
+        </select>
+      </div>
       
       <div className="flex justify-between items-center text-xs text-gray-500">
         {task.priority && (
