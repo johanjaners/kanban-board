@@ -29,7 +29,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
         description: description.trim() || undefined,
         status: 0, // Always create in Todo
         priority: priority === '' ? undefined : Number(priority),
-        dueDate: dueDate || undefined,
+        dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
       });
 
       // Reset form
