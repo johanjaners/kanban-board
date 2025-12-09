@@ -37,6 +37,21 @@ function App() {
     }
   };
 
+  const handleDelete = async (taskId: number) => {
+    if (!confirm('Are you sure you want to delete this task?')) {
+      return;
+    }
+
+    try {
+      await api.deleteTask(taskId);
+      // Refresh tasks after delete
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to delete task:', error);
+      alert('Failed to delete task');
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -59,7 +74,11 @@ function App() {
           <TaskForm onTaskCreated={fetchTasks} />
         </div>
 
-        <Board tasks={tasks} onStatusChange={handleStatusChange} />
+        <Board 
+          tasks={tasks} 
+          onStatusChange={handleStatusChange}
+          onDelete={handleDelete}
+        />
       </div>
     </div>
   );  
