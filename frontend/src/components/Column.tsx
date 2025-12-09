@@ -14,10 +14,10 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
 
   const getHeaderColor = () => {
     switch (status) {
-      case 0: return 'bg-blue-500';
-      case 1: return 'bg-yellow-500';
-      case 2: return 'bg-green-500';
-      default: return 'bg-gray-500';
+      case 0: return 'bg-blue-700';
+      case 1: return 'bg-yellow-700';
+      case 2: return 'bg-green-700';
+      default: return 'bg-gray-700';
     }
   };
 
