@@ -63,9 +63,9 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
           onChange={(e) => onStatusChange(task.id, Number(e.target.value))}
           className="flex-1 text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value={0}>📋 Todo</option>
-          <option value={1}>🔄 In Progress</option>
-          <option value={2}>✅ Done</option>
+          <option value={0}>Todo</option>
+          <option value={1}>In Progress</option>
+          <option value={2}>Done</option>
         </select>
         
         {task.priority && (
