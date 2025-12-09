@@ -7,6 +7,25 @@ type TaskCardProps = {
 };
 
 export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMenu]);
+  
   const getPriorityLabel = (priority?: number) => {
     if (!priority) return { text: 'None', color: '#6b7280' };
     if (priority <= 2) return { text: 'Low', color: '#22c55e' };
