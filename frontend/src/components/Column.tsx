@@ -25,7 +25,7 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
     <div className="rounded-lg bg-gray-300">
       <div className={`${getHeaderColor()} rounded-t-lg px-4 py-3 flex justify-between items-center`}>
         <h2 className="text-lg font-bold text-white">{title}</h2>
-        <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold text-white">
+        <span className="bg-gray-900 px-3 py-1 rounded-full text-sm font-semibold text-white">
           {filteredTasks.length}
         </span>
       </div>
