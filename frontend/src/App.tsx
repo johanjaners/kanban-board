@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { api, type TaskItem } from './services/api';
 import { Board } from './components/Board';
 import { TaskForm } from './components/TaskForm';
-import './App.css';
 
 function App() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
@@ -65,27 +64,22 @@ function App() {
   }
 
   return (
-    <div 
-      className="
-        bg-gray-100 rounded-lg 
-        min-w-[270px] max-w-7xl 
-        px-6 md:px-12 lg:px-22
-        pt-12 pb-8
-      "
-    >
-        <h1 className="text-4xl font-bold mb-6 text-gray-800 text-left">Kanban Board</h1>
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-18 pt-8 pb-8">
         
-        <div className="mb-6">
+        {/* Header Section */}
+        <div className="flex justify-between items-center mb-8 pb-4 border-b-2 border-gray-300">
+          <h1 className="text-4xl font-bold text-gray-800">Kanban Board</h1>
           <TaskForm onTaskCreated={fetchTasks} />
         </div>
 
-        <div className="pb-16 md:pb-64">
-          <Board 
-            tasks={tasks} 
-            onStatusChange={handleStatusChange}
-            onDelete={handleDelete}
-          />
-        </div>
+        {/* Board */}
+        <Board 
+          tasks={tasks} 
+          onStatusChange={handleStatusChange}
+          onDelete={handleDelete}
+        />
+      </div>
     </div>
   );  
 
