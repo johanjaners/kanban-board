@@ -14,7 +14,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "https://brave-cliff-0698b8403.3.azurestaticapps.net"
+                )
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
