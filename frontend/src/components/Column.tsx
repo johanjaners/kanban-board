@@ -30,7 +30,7 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
         </span>
       </div>
       
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 min-h-32 md:min-h-64">
         {filteredTasks.length === 0 ? (
           <p className="text-gray-400 text-center py-8">No tasks</p>
         ) : (
