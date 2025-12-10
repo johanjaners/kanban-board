@@ -65,7 +65,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-12 rounded-2xl">
+    <div className="min-h-screen bg-gray-100 p-12 rounded-2xl min-w-[330px]">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-gray-800 text-left">Kanban Board</h1>
         
