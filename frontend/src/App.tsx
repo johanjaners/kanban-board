@@ -67,7 +67,7 @@ function App() {
   return (
     <div 
       className="
-        bg-gray-100 rounded-2xl 
+        bg-gray-100 rounded-lg 
         min-w-[270px] max-w-7xl 
         px-6 md:px-12 lg:px-22
         pt-12 pb-8
