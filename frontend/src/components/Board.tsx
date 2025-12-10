@@ -9,7 +9,7 @@ type BoardProps = {
 
 export function Board({ tasks, onStatusChange, onDelete }: BoardProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <Column 
         title="Todo" 
         tasks={tasks} 

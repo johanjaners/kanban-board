@@ -26,14 +26,14 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
       className="rounded-sm bg-white border-x border-b border-gray-200"
       style={{ borderTop: `4px solid ${getTopBorderColor()}` }}
     >
-      <div className="bg-gray-50 px-4 py-3 flex justify-between items-center border-b border-gray-200">
+      <div className="bg-gray-50 px-4 py-3 flex justify-between items-center" style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.1)' }}>
         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
         <span className="bg-gray-700 px-3 py-1 rounded-full text-sm font-semibold text-white">
           {filteredTasks.length}
         </span>
       </div>
       
-      <div className="py-4 px-2 space-y-2 min-h-32 md:min-h-64">
+      <div className="py-4 px-4 space-y-4 min-h-32 md:min-h-64">
         {filteredTasks.length === 0 ? (
           <p className="text-gray-400 text-center py-8">No tasks</p>
         ) : (

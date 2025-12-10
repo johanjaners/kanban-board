@@ -68,7 +68,7 @@ function App() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-18 pt-8 pb-8">
         
         {/* Header Section */}
-        <div className="flex justify-between items-center mb-8 pb-4 border-b-2 border-gray-300">
+        <div className="flex justify-between items-center mb-8 pb-4" style={{ borderBottom: '2px solid rgba(0, 0, 0, 0.1)' }}>
           <h1 className="text-4xl font-bold text-gray-800">Kanban Board</h1>
           <TaskForm onTaskCreated={fetchTasks} />
         </div>
