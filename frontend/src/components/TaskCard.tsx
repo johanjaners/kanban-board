@@ -34,15 +34,6 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
     return { text: 'High', color: '#ef4444' };
   };
 
-  const getStatusColor = (status: number) => {
-    switch (status) {
-      case 0: return 'border-l-blue-500';
-      case 1: return 'border-l-yellow-500';
-      case 2: return 'border-l-green-500';
-      default: return 'border-l-gray-500';
-    }
-  };
-
   const formatDate = (date?: string) => {
     if (!date) return null;
     return new Date(date).toLocaleDateString('sv-SE');
