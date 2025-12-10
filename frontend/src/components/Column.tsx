@@ -22,15 +22,15 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
   };
 
   return (
-    <div className="rounded-lg bg-gray-300">
-      <div className={`${getHeaderColor()} rounded-t-lg px-4 py-3 flex justify-between items-center`}>
+    <div className="rounded-sm bg-gray-300">
+      <div className={`${getHeaderColor()} rounded-t-sm px-4 py-3 flex justify-between items-center`}>
         <h2 className="text-lg font-bold text-white">{title}</h2>
         <span className="bg-gray-900 px-3 py-1 rounded-full text-sm font-semibold text-white">
           {filteredTasks.length}
         </span>
       </div>
       
-      <div className="p-4 space-y-3 min-h-32 md:min-h-64">
+      <div className="p-2 space-y-3 min-h-32 md:min-h-64">
         {filteredTasks.length === 0 ? (
           <p className="text-gray-400 text-center py-8">No tasks</p>
         ) : (
