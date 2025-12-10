@@ -61,7 +61,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-sm border-2 border-gray-200 transition-colors"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md transition-colors"
       >
         + Add New Task
       </button>
