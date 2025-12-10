@@ -100,7 +100,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
                 onDelete(task.id);
                 setShowMenu(false);
               }}
-              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-700 rounded"
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-300 rounded"
             >
               Delete
             </button>
