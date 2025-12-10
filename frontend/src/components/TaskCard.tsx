@@ -42,7 +42,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
   const priorityInfo = getPriorityLabel(task.priority);
   
   return (
-    <div className="relative bg-gray-100 border border-gray-200 rounded-lg p-4 shadow-md hover:shadow-lg transition-all">
+    <div className="relative bg-gray-100 border border-gray-200 rounded-sm p-4 shadow-md hover:shadow-lg transition-all">
       <h3 className="font-semibold text-gray-800 mb-2">{task.title}</h3>
       
       {task.description && (
