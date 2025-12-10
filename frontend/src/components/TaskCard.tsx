@@ -94,13 +94,13 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         </button>
         
         {showMenu && (
-          <div className="absolute right-0 mt-1 bg-white border border-gray-300 rounded shadow-lg z-10">
+          <div className="absolute right-0 mt-1 bg-slate-200 border border-gray-300 rounded shadow-lg z-10">
             <button
               onClick={() => {
                 onDelete(task.id);
                 setShowMenu(false);
               }}
-              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-300 rounded"
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:text-red-700 rounded transition-colors"
             >
               Delete
             </button>
