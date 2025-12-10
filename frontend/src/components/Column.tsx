@@ -14,15 +14,18 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
 
   const getTopBorderColor = () => {
     switch (status) {
-      case 0: return 'border-t-blue-500';
-      case 1: return 'border-t-amber-500';
-      case 2: return 'border-t-emerald-500';
-      default: return 'border-t-gray-500';
+      case 0: return '#3b82f6';  // blue-500
+      case 1: return '#f59e0b';  // amber-500
+      case 2: return '#10b981';  // emerald-500
+      default: return '#6b7280';  // gray-500
     }
   };
 
   return (
-    <div className={`rounded-sm bg-white border-x border-b border-gray-200 border-t-4 ${getTopBorderColor()}`}>
+    <div 
+      className="rounded-sm bg-white border-x border-b border-gray-200"
+      style={{ borderTop: `4px solid ${getTopBorderColor()}` }}
+    >
       <div className="bg-gray-50 px-4 py-3 flex justify-between items-center border-b border-gray-200">
         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
         <span className="bg-gray-700 px-3 py-1 rounded-full text-sm font-semibold text-white">
