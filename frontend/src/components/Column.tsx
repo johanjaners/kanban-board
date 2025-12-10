@@ -12,20 +12,20 @@ type ColumnProps = {
 export function Column({ title, tasks, status, onStatusChange, onDelete }: ColumnProps) {
   const filteredTasks = tasks.filter(task => task.status === status);
 
-  const getHeaderColor = () => {
+  const getTopBorderColor = () => {
     switch (status) {
-      case 0: return 'bg-blue-600';
-      case 1: return 'bg-yellow-600';
-      case 2: return 'bg-green-600';
-      default: return 'bg-gray-600';
+      case 0: return 'border-t-blue-500';
+      case 1: return 'border-t-amber-500';
+      case 2: return 'border-t-emerald-500';
+      default: return 'border-t-gray-500';
     }
   };
 
   return (
-    <div className="rounded-sm bg-gray-300">
-      <div className={`${getHeaderColor()} rounded-t-sm px-4 py-3 flex justify-between items-center`}>
-        <h2 className="text-lg font-bold text-white">{title}</h2>
-        <span className="bg-gray-900 px-3 py-1 rounded-full text-sm font-semibold text-white">
+    <div className={`rounded-sm bg-white border-x border-b border-gray-200 border-t-4 ${getTopBorderColor()}`}>
+      <div className="bg-gray-50 px-4 py-3 flex justify-between items-center border-b border-gray-200">
+        <h2 className="text-lg font-bold text-gray-800">{title}</h2>
+        <span className="bg-gray-700 px-3 py-1 rounded-full text-sm font-semibold text-white">
           {filteredTasks.length}
         </span>
       </div>
