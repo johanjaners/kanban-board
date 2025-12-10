@@ -65,7 +65,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-12 rounded-2xl min-w-[330px]">
+    <div className="bg-gray-100 pt-12 px-8 pb-8 md:px-12 rounded-2xl min-w-[330px]">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-gray-800 text-left">Kanban Board</h1>
         
@@ -73,11 +73,13 @@ function App() {
           <TaskForm onTaskCreated={fetchTasks} />
         </div>
 
-        <Board 
-          tasks={tasks} 
-          onStatusChange={handleStatusChange}
-          onDelete={handleDelete}
-        />
+        <div className="pb-16">
+          <Board 
+            tasks={tasks} 
+            onStatusChange={handleStatusChange}
+            onDelete={handleDelete}
+          />
+        </div>
       </div>
     </div>
   );  
