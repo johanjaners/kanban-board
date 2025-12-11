@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import type { TaskItem } from '../services/api';
+import { ConfirmModal } from './ConfirmModal';
 
 type TaskCardProps = {
   task: TaskItem;
@@ -9,6 +10,7 @@ type TaskCardProps = {
 
 export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
           <div className="absolute right-0 mt-1 bg-slate-200 border border-gray-300 rounded shadow-lg z-10">
             <button
               onClick={() => {
-                onDelete(task.id);
+                setShowConfirm(true);
                 setShowMenu(false);
               }}
               className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:text-red-700 rounded transition-colors"
@@ -98,6 +100,16 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={showConfirm}
+        onConfirm={() => {
+          onDelete(task.id);
+          setShowConfirm(false);
+        }}
+        onCancel={() => setShowConfirm(false)}
+        message={`Are you sure you want to delete "${task.title}"? This action cannot be undone.`}
+      />
     </div>
   );
 }
