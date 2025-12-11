@@ -11,7 +11,7 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md mb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-18">
-        <div className="flex justify-between items-center py-3">
+        <div className="flex justify-between items-center h-16">
           <div className="flex space-x-8">
             <NavLink to="/" className={getLinkClass}>
               Kanban
