@@ -2,7 +2,7 @@
 
 A full-stack Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, deployed on **Azure** with automated CI/CD.
 
-![Kanban Board](screenshots/kanban.png)
+![Kanban Board](screenshots/kanban-board.png)
 
 ---
 
