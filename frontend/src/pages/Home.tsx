@@ -36,10 +36,6 @@ export function Home() {
   };
 
   const handleDelete = async (taskId: number) => {
-    if (!confirm('Are you sure you want to delete this task?')) {
-      return;
-    }
-
     try {
       await api.deleteTask(taskId);
       fetchTasks();
