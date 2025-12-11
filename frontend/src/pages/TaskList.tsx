@@ -3,7 +3,13 @@ import { api, type TaskItem } from '../services/api';
 import { TaskCard } from '../components/TaskCard';
 
 const statusNames = ['To Do', 'In Progress', 'Done'];
-const priorityNames = ['Low', 'Medium', 'High'];
+
+const getPriorityLabel = (priority?: number) => {
+  if (!priority) return { text: 'Low', color: 'bg-green-100 text-green-800' };
+  if (priority <= 2) return { text: 'Low', color: 'bg-green-100 text-green-800' };
+  if (priority <= 4) return { text: 'Medium', color: 'bg-yellow-100 text-yellow-800' };
+  return { text: 'High', color: 'bg-red-100 text-red-800' };
+};
 
 export function TaskList() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
@@ -97,12 +103,8 @@ export function TaskList() {
                   </span>
                 </td>
                 <td className="px-3 py-4 whitespace-nowrap">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    task.priority === 2 ? 'bg-red-100 text-red-800' :
-                    task.priority === 1 ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-green-100 text-green-800'
-                  }`}>
-                    {task.priority !== undefined ? priorityNames[task.priority] : 'Low'}
+                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getPriorityLabel(task.priority).color}`}>
+                    {getPriorityLabel(task.priority).text}
                   </span>
                 </td>
                 <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
