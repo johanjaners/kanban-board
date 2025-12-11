@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { api, type TaskItem } from '../services/api';
+import { TaskCard } from '../components/TaskCard';
 
 const statusNames = ['To Do', 'In Progress', 'Done'];
 const priorityNames = ['Low', 'Medium', 'High'];
@@ -8,11 +9,46 @@ export function TaskList() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchTasks = () => {
+    setLoading(true);
     api.getTasks()
       .then(setTasks)
       .catch(console.error)
       .finally(() => setLoading(false));
+  };
+
+  const handleStatusChange = async (taskId: number, newStatus: number) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    try {
+      await api.updateTask(taskId, {
+        title: task.title,
+        description: task.description,
+        status: newStatus,
+        priority: task.priority,
+        dueDate: task.dueDate,
+      });
+      
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to update task status:', error);
+      alert('Failed to update task status');
+    }
+  };
+
+  const handleDelete = async (taskId: number) => {
+    try {
+      await api.deleteTask(taskId);
+      fetchTasks();
+    } catch (error) {
+      console.error('Failed to delete task:', error);
+      alert('Failed to delete task');
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   if (loading) {
@@ -27,7 +63,8 @@ export function TaskList() {
     <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-18 pb-8">
       <h1 className="text-4xl font-bold text-gray-800 mb-8">All Tasks</h1>
       
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Desktop Table View */}
+      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -75,6 +112,24 @@ export function TaskList() {
             ))}
           </tbody>
         </table>
+        
+        {tasks.length === 0 && (
+          <div className="text-center py-12 text-gray-500">
+            No tasks found
+          </div>
+        )}
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="md:hidden grid grid-cols-1 gap-4">
+        {tasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            onStatusChange={handleStatusChange}
+            onDelete={handleDelete}
+          />
+        ))}
         
         {tasks.length === 0 && (
           <div className="text-center py-12 text-gray-500">
