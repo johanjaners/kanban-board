@@ -6,7 +6,7 @@ import { About } from './pages/About';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 min-w-80">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
