@@ -38,8 +38,8 @@ export function About() {
         <section>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Features</h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>Create, update, and delete tasks</li>
-            <li>Drag-and-drop task management across columns</li>
+            <li>Create and delete tasks</li>
+            <li>Change task status with dropdown</li>
             <li>Priority levels (Low, Medium, High)</li>
             <li>Due date tracking</li>
             <li>Responsive design for mobile and desktop</li>
@@ -58,7 +58,7 @@ export function About() {
 
         <section className="pt-4 border-t border-gray-200">
           <p className="text-gray-600 italic">
-            Built for Hack Week at School of Applied Technology (Salt)
+            Built during Hack Week at School of Applied Technology (Salt)
           </p>
         </section>
       </div>
