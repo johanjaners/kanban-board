@@ -64,20 +64,20 @@ export function TaskList() {
       <h1 className="text-4xl font-bold text-gray-800 mb-8">All Tasks</h1>
       
       {/* Desktop Table View */}
-      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div className="hidden md:block bg-white rounded-lg shadow overflow-x-auto">
+        <table className="w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Title
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                 Priority
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                 Due Date
               </th>
             </tr>
@@ -85,18 +85,18 @@ export function TaskList() {
           <tbody className="bg-white divide-y divide-gray-200">
             {tasks.map((task) => (
               <tr key={task.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{task.title}</div>
+                <td className="px-4 py-4">
+                  <div className="text-sm font-medium text-gray-900 break-words">{task.title}</div>
                   {task.description && (
-                    <div className="text-sm text-gray-500">{task.description}</div>
+                    <div className="text-sm text-gray-500 break-words">{task.description}</div>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-3 py-4 whitespace-nowrap">
                   <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                     {statusNames[task.status]}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-3 py-4 whitespace-nowrap">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                     task.priority === 2 ? 'bg-red-100 text-red-800' :
                     task.priority === 1 ? 'bg-yellow-100 text-yellow-800' :
@@ -105,7 +105,7 @@ export function TaskList() {
                     {task.priority !== undefined ? priorityNames[task.priority] : 'Low'}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
                   {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '-'}
                 </td>
               </tr>
