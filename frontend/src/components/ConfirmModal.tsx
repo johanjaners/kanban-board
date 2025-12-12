@@ -9,7 +9,7 @@ export function ConfirmModal({ isOpen, onConfirm, onCancel, message }: ConfirmMo
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-[#000000ca] flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md w-full">
         <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">
           Confirm Action
