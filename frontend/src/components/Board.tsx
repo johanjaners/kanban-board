@@ -11,7 +11,7 @@ export function Board({ tasks, onStatusChange, onDelete }: BoardProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
       <Column 
-        title="Todo" 
+        title="To Do"
         tasks={tasks} 
         status={0}
         onStatusChange={onStatusChange}
