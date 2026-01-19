@@ -9,14 +9,12 @@ function App() {
     return (
         <div className="min-h-screen bg-gray-100 min-w-80">
             <main>
-                {/* IF SIGNED OUT: Show Clerk's Sign-In Component */}
                 <SignedOut>
                     <div className="flex justify-center items-center h-[80vh]">
                         <SignIn />
                     </div>
                 </SignedOut>
 
-                {/* IF SIGNED IN: Show Application */}
                 <SignedIn>
                     <Navbar />
                     <Routes>
