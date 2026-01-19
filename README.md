@@ -1,15 +1,59 @@
-# Kanban Board — Full-Stack Application
+# Kanban Board
 
-A full-stack Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, deployed on **Azure** with automated CI/CD.
-
-![Kanban Board](screenshots/kanban-board.png)
+A Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, deployed on **Azure** with automated CI/CD.
 
 ---
 
 ## 🚀 Live Demo
 
 -   **Frontend:** [Azure Static Web Apps](https://brave-cliff-0698b8403.3.azurestaticapps.net/)
--   **Backend API:** Running on Azure App Service (Swagger documentation available upon request)
+-   **Backend API:** [Azure App Service](https://your-backend-url.azurewebsites.net)
+
+---
+
+## 🏗️ Architecture
+
+### Project Structure
+```
+kanban-board/
+├── backend/
+│   └── KanbanBoard.Api/
+│       ├── Controllers/
+│       ├── Data/
+│       ├── Models/
+│       └── Migrations/
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── services/
+└── screenshots/
+```
+
+### Deployment Architecture
+```
+GitHub → Actions → Azure Static Web Apps (Frontend)
+                → Azure App Service (Backend)
+                → Neon PostgreSQL (Database)
+```
+
+### Infrastructure
+
+-   **Frontend:** Azure Static Web Apps
+-   **Backend:** Azure App Service
+-   **Database:** Neon PostgreSQL
+-   **CI/CD:** GitHub Actions (automated deployment on push to `main`)
+
+---
+
+## 📸 Screenshots
+
+![Kanban Board](screenshots/kanban-board.png)
+
+**Additional Views:**
+-   [Tasks List View](screenshots/tasks-list.png)
+-   [Mobile View](screenshots/mobile.png)
+-   [Create Task Modal](screenshots/create-task.png)
 
 ---
 
@@ -30,13 +74,6 @@ A full-stack Kanban board application built with **ASP.NET Web API**, **React + 
 -   PostgreSQL (Neon)
 -   RESTful CRUD API
 -   CORS configured for Azure deployment
-
-### Infrastructure
-
--   Azure Static Web Apps (Frontend)
--   Azure App Service (Backend)
--   Neon PostgreSQL (Database)
--   GitHub Actions (CI/CD)
 
 ---
 
@@ -96,7 +133,6 @@ A full-stack Kanban board application built with **ASP.NET Web API**, **React + 
 ## ⚙️ Running Locally
 
 ### Backend
-
 ```bash
 cd backend/KanbanBoard.Api
 dotnet restore
@@ -106,7 +142,6 @@ dotnet run
 Backend runs at `https://localhost:5001`
 
 ### Frontend
-
 ```bash
 cd frontend
 npm install
@@ -118,13 +153,11 @@ Frontend runs at `http://localhost:5173`
 ### Environment Variables
 
 **Frontend** (`frontend/.env`):
-
 ```
 VITE_API_URL=https://localhost:5001
 ```
 
 **Backend** (`backend/KanbanBoard.Api/appsettings.json`):
-
 ```json
 {
     "ConnectionStrings": {
@@ -135,90 +168,6 @@ VITE_API_URL=https://localhost:5001
 
 ---
 
-## 🚀 Deployment
-
-### Automated CI/CD Pipeline
-
--   **GitHub Actions** automatically builds and deploys on push to `main`
--   Frontend deployed to **Azure Static Web Apps**
--   Backend deployed to **Azure App Service**
--   Database hosted on **Neon PostgreSQL**
-
-### Deployment Architecture
-
-```
-GitHub → Actions → Azure Static Web Apps (Frontend)
-                → Azure App Service (Backend)
-                → Neon PostgreSQL (Database)
-```
-
----
-
-## 📸 More Screenshots
-
--   [Tasks List View](screenshots/tasks-list.png)
--   [About Page](screenshots/about.png)
--   [Mobile View](screenshots/mobile.png)
--   [Create Task Modal](screenshots/create-task.png)
-
----
-
-## 🏗️ Project Structure
-
-```
-kanban-board/
-├── backend/
-│   └── KanbanBoard.Api/
-│       ├── Controllers/
-│       ├── Data/
-│       ├── Models/
-│       └── Migrations/
-├── frontend/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       └── services/
-└── screenshots/
-```
-
----
-
-## 🎯 Key Learnings
-
--   Full-stack deployment with Azure services
--   RESTful API design and implementation
--   Database migrations with Entity Framework Core
--   React Router for multi-page applications
--   Responsive design patterns
--   CI/CD with GitHub Actions
--   CORS configuration for cross-origin requests
-
----
-
-## 📝 Future Enhancements
-
--   [ ] User authentication
--   [ ] Task search and filtering
--   [ ] Task assignment to users
--   [ ] Drag-and-drop between columns
--   [ ] Task comments and activity log
--   [ ] Email notifications for due dates
-
----
-
 ## 📄 License
 
 MIT
-
----
-
-## 👤 Author
-
-**Johan Janers**
-
--   GitHub: [@johanjaners](https://github.com/johanjaners)
--   LinkedIn: [Your LinkedIn](https://linkedin.com/in/johan-janers)
-
----
-
-**Built during Hack Week at School of Applied Technology (Salt)**
