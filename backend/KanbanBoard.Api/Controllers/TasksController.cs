@@ -1,17 +1,18 @@
 using KanbanBoard.Api.Data;
 using KanbanBoard.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace KanbanBoard.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TasksController(AppDbContext db) : ControllerBase
 {
     private readonly AppDbContext _db = db;
 
-    // GET: api/tasks
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
     {
@@ -22,7 +23,6 @@ public class TasksController(AppDbContext db) : ControllerBase
         return Ok(tasks);
     }
 
-    // GET: api/tasks/{id}
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TaskItem>> GetById(int id)
     {
@@ -31,7 +31,6 @@ public class TasksController(AppDbContext db) : ControllerBase
         return Ok(task);
     }
 
-    // GET: api/tasks/count
     [HttpGet("count")]
     public async Task<ActionResult<object>> GetCount()
     {
@@ -39,7 +38,6 @@ public class TasksController(AppDbContext db) : ControllerBase
         return Ok(new { count });
     }
 
-    // POST: api/tasks
     [HttpPost]
     public async Task<ActionResult<TaskItem>> Create([FromBody] TaskCreateDto dto)
     {
@@ -60,7 +58,6 @@ public class TasksController(AppDbContext db) : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
     }
 
-    // PUT: api/tasks/{id}
     [HttpPut("{id:int}")]
     public async Task<ActionResult<TaskItem>> Update(int id, [FromBody] TaskUpdateDto dto)
     {
@@ -78,7 +75,6 @@ public class TasksController(AppDbContext db) : ControllerBase
         return Ok(task);
     }
 
-    // DELETE: api/tasks/{id}
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
