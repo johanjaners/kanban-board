@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api, type TaskItem } from '../services/api';
 import { TaskCard } from '../components/TaskCard';
+import { useAuth } from '@clerk/clerk-react';
 
 const statusNames = ['To Do', 'In Progress', 'Done'];
 
@@ -14,10 +15,14 @@ const getPriorityLabel = (priority?: number) => {
 export function TaskList() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const { getToken } = useAuth();
 
-  const fetchTasks = () => {
+  const fetchTasks = async () => {
     setLoading(true);
-    api.getTasks()
+    const token = await getToken();
+    if (!token) return;
+    
+    api.getTasks(token)
       .then(setTasks)
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -28,7 +33,10 @@ export function TaskList() {
     if (!task) return;
 
     try {
-      await api.updateTask(taskId, {
+      const token = await getToken();
+      if (!token) return;
+
+      await api.updateTask(token, taskId, {
         title: task.title,
         description: task.description,
         status: newStatus,
@@ -45,7 +53,10 @@ export function TaskList() {
 
   const handleDelete = async (taskId: number) => {
     try {
-      await api.deleteTask(taskId);
+      const token = await getToken();
+      if (!token) return;
+
+      await api.deleteTask(token, taskId);
       fetchTasks();
     } catch (error) {
       console.error('Failed to delete task:', error);
@@ -92,9 +103,9 @@ export function TaskList() {
             {tasks.map((task) => (
               <tr key={task.id} className="hover:bg-gray-50">
                 <td className="px-4 py-4">
-                  <div className="text-sm font-medium text-gray-900 break-words">{task.title}</div>
+                  <div className="text-sm font-medium text-gray-900 wrap-break-word">{task.title}</div>
                   {task.description && (
-                    <div className="text-sm text-gray-500 break-words">{task.description}</div>
+                    <div className="text-sm text-gray-500 wrap-break-word">{task.description}</div>
                   )}
                 </td>
                 <td className="px-3 py-4 whitespace-nowrap">
