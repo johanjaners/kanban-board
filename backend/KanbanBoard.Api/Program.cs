@@ -1,5 +1,7 @@
 using KanbanBoard.Api.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,21 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["Clerk:Authority"];
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -31,7 +48,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
