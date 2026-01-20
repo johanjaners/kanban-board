@@ -2,14 +2,20 @@ import { useEffect, useState } from 'react';
 import { api, type TaskItem } from '../services/api';
 import { Board } from '../components/Board';
 import { TaskForm } from '../components/TaskForm';
+import { useAuth } from '@clerk/clerk-react';
 
 export function Home() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const { getToken } = useAuth();
 
-  const fetchTasks = () => {
+  const fetchTasks = async () => {
     setLoading(true);
-    api.getTasks()
+
+    const token = await getToken();
+    if (!token) return;
+
+    api.getTasks(token)
       .then(setTasks)
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -20,7 +26,10 @@ export function Home() {
     if (!task) return;
 
     try {
-      await api.updateTask(taskId, {
+      const token = await getToken();
+      if (!token) return;
+
+      await api.updateTask(token, taskId, {
         title: task.title,
         description: task.description,
         status: newStatus,
@@ -37,7 +46,10 @@ export function Home() {
 
   const handleDelete = async (taskId: number) => {
     try {
-      await api.deleteTask(taskId);
+      const token = await getToken();
+      if (!token) return;
+
+      await api.deleteTask(token, taskId);
       fetchTasks();
     } catch (error) {
       console.error('Failed to delete task:', error);

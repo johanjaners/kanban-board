@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { api } from '../services/api';
+import { useAuth } from '@clerk/clerk-react';
 
 type TaskFormProps = {
   onTaskCreated: () => void;
@@ -12,6 +13,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
   const [priority, setPriority] = useState<number | ''>('');
   const [dueDate, setDueDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { getToken } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +26,10 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
     setIsSubmitting(true);
 
     try {
-      await api.createTask({
+      const token = await getToken();
+      if (!token) return;
+
+      await api.createTask(token, {
         title: title.trim(),
         description: description.trim() || undefined,
         status: 0, // Always create in Todo
