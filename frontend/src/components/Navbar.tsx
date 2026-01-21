@@ -3,11 +3,9 @@ import { NavLink } from "react-router-dom";
 
 export function Navbar() {
     const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-        `font-medium transition-colors pb-1 border-b-2 ${
-            isActive
-                ? "text-blue-600 border-blue-600"
-                : "text-gray-700 border-transparent hover:text-blue-600 hover:border-blue-300"
-        }`;
+        isActive
+            ? "text-blue-600 font-semibold underline decoration-blue-600 decoration-2 underline-offset-8"
+            : "text-gray-700 font-semibold hover:text-blue-600 hover:underline hover:decoration-blue-600 hover:decoration-2 hover:underline-offset-8";
 
     return (
         <nav className="sticky top-0 z-50 bg-white shadow-md mb-8">
