@@ -3,6 +3,7 @@ import { api, type TaskItem } from '../services/api';
 import { Board } from '../components/Board';
 import { TaskForm } from '../components/TaskForm';
 import { useAuth } from '@clerk/clerk-react';
+import { toast } from 'react-toastify';
 
 export function Home() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
@@ -38,9 +39,10 @@ export function Home() {
       });
       
       fetchTasks();
+      toast.success('Task status updated!');
     } catch (error) {
       console.error('Failed to update task status:', error);
-      alert('Failed to update task status');
+      toast.error('Failed to update task status');
     }
   };
 
@@ -51,9 +53,10 @@ export function Home() {
 
       await api.deleteTask(token, taskId);
       fetchTasks();
+      toast.success('Task deleted successfully!');
     } catch (error) {
       console.error('Failed to delete task:', error);
-      alert('Failed to delete task');
+      toast.error('Failed to delete task');
     }
   };
 
