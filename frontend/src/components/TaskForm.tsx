@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { api } from '../services/api';
 import { useAuth } from '@clerk/clerk-react';
+import { toast } from 'react-toastify';
 
 type TaskFormProps = {
   onTaskCreated: () => void;
@@ -46,9 +47,10 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
 
       // Notify parent to refresh tasks
       onTaskCreated();
+      toast.success('Task created successfully!');
     } catch (error) {
       console.error('Failed to create task:', error);
-      alert('Failed to create task. Please try again.');
+      toast.error('Failed to create task. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
