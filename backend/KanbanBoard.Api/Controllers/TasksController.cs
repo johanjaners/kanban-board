@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using KanbanBoard.Api.Data;
 using KanbanBoard.Api.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,11 +13,14 @@ namespace KanbanBoard.Api.Controllers;
 public class TasksController(AppDbContext db) : ControllerBase
 {
     private readonly AppDbContext _db = db;
+    private string CurrentUserId => User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                                    ?? throw new UnauthorizedAccessException("User ID missing.");
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
     {
         var tasks = await _db.Tasks
+            .Where(t => t.UserId == CurrentUserId)
             .OrderBy(t => t.Id)
             .ToListAsync();
 
@@ -27,15 +31,11 @@ public class TasksController(AppDbContext db) : ControllerBase
     public async Task<ActionResult<TaskItem>> GetById(int id)
     {
         var task = await _db.Tasks.FindAsync(id);
-        if (task is null) return NotFound();
-        return Ok(task);
-    }
 
-    [HttpGet("count")]
-    public async Task<ActionResult<object>> GetCount()
-    {
-        var count = await _db.Tasks.CountAsync();
-        return Ok(new { count });
+        if (task is null || task.UserId != CurrentUserId)
+            return NotFound();
+
+        return Ok(task);
     }
 
     [HttpPost]
@@ -49,7 +49,8 @@ public class TasksController(AppDbContext db) : ControllerBase
             Priority = dto.Priority,
             DueDate = dto.DueDate,
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdatedAt = DateTime.UtcNow,
+            UserId = CurrentUserId
         };
 
         _db.Tasks.Add(task);
@@ -61,7 +62,9 @@ public class TasksController(AppDbContext db) : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<ActionResult<TaskItem>> Update(int id, [FromBody] TaskUpdateDto dto)
     {
-        var task = await _db.Tasks.FindAsync(id);
+        var task = await _db.Tasks
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == CurrentUserId);
+
         if (task is null) return NotFound();
 
         task.Title = dto.Title;
@@ -76,13 +79,15 @@ public class TasksController(AppDbContext db) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<ActionResult<TaskItem>> Delete(int id)
     {
-        var task = await _db.Tasks.FindAsync(id);
+        var task = await _db.Tasks
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == CurrentUserId);
+
         if (task is null) return NotFound();
 
         _db.Tasks.Remove(task);
         await _db.SaveChangesAsync();
-        return NoContent();
+        return Ok(task);
     }
 }
