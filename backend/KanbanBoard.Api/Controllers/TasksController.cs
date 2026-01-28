@@ -1,93 +1,74 @@
 using System.Security.Claims;
-using KanbanBoard.Api.Data;
+using KanbanBoard.Api.Mappings;
 using KanbanBoard.Api.Models;
+using KanbanBoard.Api.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KanbanBoard.Api.Controllers;
 
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class TasksController(AppDbContext db) : ControllerBase
+public class TasksController(ITaskRepository repository) : ControllerBase
 {
-    private readonly AppDbContext _db = db;
+    private readonly ITaskRepository _repository = repository;
     private string CurrentUserId => User.FindFirst(ClaimTypes.NameIdentifier)?.Value
                                     ?? throw new UnauthorizedAccessException("User ID missing.");
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
+    public async Task<ActionResult<IEnumerable<TaskResponseDto>>> GetAll()
     {
-        var tasks = await _db.Tasks
-            .Where(t => t.UserId == CurrentUserId)
-            .OrderBy(t => t.Id)
-            .ToListAsync();
+        var tasks = await _repository.GetAllAsync(CurrentUserId);
 
-        return Ok(tasks);
+        var dtos = tasks.Select(t => t.ToResponseDto());
+
+        return Ok(dtos);
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<TaskItem>> GetById(int id)
+    public async Task<ActionResult<TaskResponseDto>> GetById(int id)
     {
-        var task = await _db.Tasks.FindAsync(id);
+        var task = await _repository.GetByIdAsync(id, CurrentUserId);
 
-        if (task is null || task.UserId != CurrentUserId)
-            return NotFound();
+        if (task is null) return NotFound();
 
-        return Ok(task);
+        return Ok(task.ToResponseDto());
     }
 
     [HttpPost]
-    public async Task<ActionResult<TaskItem>> Create([FromBody] TaskCreateDto dto)
+    public async Task<ActionResult<TaskResponseDto>> Create([FromBody] TaskCreateDto dto)
     {
-        var task = new TaskItem
-        {
-            Title = dto.Title,
-            Description = dto.Description,
-            Status = dto.Status,
-            Priority = dto.Priority,
-            DueDate = dto.DueDate,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow,
-            UserId = CurrentUserId
-        };
+        var task = dto.ToEntity(CurrentUserId);
 
-        _db.Tasks.Add(task);
-        await _db.SaveChangesAsync();
+        await _repository.AddAsync(task);
 
-        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task.ToResponseDto());
     }
 
     [HttpPut("{id:int}")]
-    public async Task<ActionResult<TaskItem>> Update(int id, [FromBody] TaskUpdateDto dto)
+    public async Task<ActionResult<TaskResponseDto>> Update(int id, [FromBody] TaskUpdateDto dto)
     {
-        var task = await _db.Tasks
-            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == CurrentUserId);
+        var task = await _repository.GetByIdAsync(id, CurrentUserId);
 
         if (task is null) return NotFound();
 
-        task.Title = dto.Title;
-        task.Description = dto.Description;
-        task.Status = dto.Status;
-        task.Priority = dto.Priority;
-        task.DueDate = dto.DueDate;
-        task.UpdatedAt = DateTime.UtcNow;
+        dto.UpdateEntity(task);
 
-        await _db.SaveChangesAsync();
-        return Ok(task);
+        await _repository.UpdateAsync(task);
+
+        return Ok(task.ToResponseDto());
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult<TaskItem>> Delete(int id)
+    public async Task<ActionResult<TaskResponseDto>> Delete(int id)
     {
-        var task = await _db.Tasks
-            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == CurrentUserId);
+        var task = await _repository.GetByIdAsync(id, CurrentUserId);
 
         if (task is null) return NotFound();
 
-        _db.Tasks.Remove(task);
-        await _db.SaveChangesAsync();
-        return Ok(task);
+        await _repository.DeleteAsync(task);
+
+        return Ok(task.ToResponseDto());
     }
 }
