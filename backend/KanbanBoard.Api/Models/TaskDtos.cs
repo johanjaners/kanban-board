@@ -15,3 +15,14 @@ public record TaskUpdateDto(
     int? Priority,
     DateTime? DueDate
 );
+
+public record TaskResponseDto(
+    int Id,
+    string Title,
+    string? Description,
+    TaskStatus Status,
+    int? Priority,
+    DateTime? DueDate,
+    DateTime CreatedAt,
+    DateTime UpdatedAt
+);
