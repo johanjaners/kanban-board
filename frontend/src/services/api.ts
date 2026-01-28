@@ -1,15 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL;
+import { type TaskItem, type CreateTaskDto, type UpdateTaskDto } from "../types/Task";
 
-export type TaskItem = {
-    id: number;
-    title: string;
-    description?: string;
-    status: number; // 0=Todo, 1=InProgress, 2=Done
-    priority?: number;
-    dueDate?: string;
-    createdAt: string;
-    updatedAt: string;
-};
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const api = {
     async getTasks(token: string): Promise<TaskItem[]> {
@@ -22,16 +13,7 @@ export const api = {
         return res.json();
     },
 
-    async createTask(
-        token: string,
-        task: {
-            title: string;
-            description?: string;
-            status: number;
-            priority?: number;
-            dueDate?: string;
-        },
-    ): Promise<TaskItem> {
+    async createTask(token: string, task: CreateTaskDto): Promise<TaskItem> {
         const res = await fetch(`${API_URL}/api/tasks`, {
             method: "POST",
             headers: {
@@ -44,17 +26,7 @@ export const api = {
         return res.json();
     },
 
-    async updateTask(
-        token: string,
-        id: number,
-        task: {
-            title: string;
-            description?: string;
-            status: number;
-            priority?: number;
-            dueDate?: string;
-        },
-    ): Promise<TaskItem> {
+    async updateTask(token: string, id: number, task: UpdateTaskDto): Promise<TaskItem> {
         const res = await fetch(`${API_URL}/api/tasks/${id}`, {
             method: "PUT",
             headers: {
