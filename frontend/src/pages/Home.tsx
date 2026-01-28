@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { api, type TaskItem } from '../services/api';
+import { api } from '../services/api';
+import type { TaskItem } from '../types/Task';
 import { Board } from '../components/Board';
 import { TaskForm } from '../components/TaskForm';
 import { useAuth } from '@clerk/clerk-react';

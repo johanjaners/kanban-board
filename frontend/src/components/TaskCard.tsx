@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import type { TaskItem } from '../services/api';
+import type { TaskItem } from '../types/Task';
 import { ConfirmModal } from './ConfirmModal';
 
 type TaskCardProps = {

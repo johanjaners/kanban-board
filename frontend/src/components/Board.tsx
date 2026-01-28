@@ -1,4 +1,4 @@
-import type { TaskItem } from '../services/api';
+import type { TaskItem } from '../types/Task';
 import { Column } from './Column';
 
 type BoardProps = {
