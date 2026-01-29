@@ -155,7 +155,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+            className="flex-1 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white cursor-pointer font-semibold py-2 px-4 rounded-md transition-colors"
           >
             {isSubmitting ? 'Creating...' : 'Create Task'}
           </button>
@@ -163,7 +163,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
             type="button"
             onClick={handleCancel}
             disabled={isSubmitting}
-            className="flex-1 bg-gray-200 hover:bg-gray-700 disabled:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md transition-colors"
+            className="flex-1 bg-gray-200 hover:bg-gray-700 disabled:bg-gray-100 text-gray-800 cursor-pointer font-semibold py-2 px-4 rounded-md transition-colors"
           >
             Cancel
           </button>
