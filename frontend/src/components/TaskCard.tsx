@@ -55,7 +55,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         <select
           value={task.status}
           onChange={(e) => onStatusChange(task.id, Number(e.target.value))}
-          className="flex-1 min-w-[100px] text-sm border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 min-w-[100px] text-sm border border-gray-300 rounded px-2 py-1 hover:cursor-pointer bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value={0}>Todo</option>
           <option value={1}>In Progress</option>
@@ -80,7 +80,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
       <div className="absolute top-2 right-2" ref={menuRef}>
         <button
           onClick={() => setShowMenu(!showMenu)}
-          className="text-gray-400 hover:text-gray-600 text-lg transition-colors"
+          className="text-gray-400 hover:text-gray-600 hover:cursor-pointer text-lg transition-colors"
           aria-label="Menu"
         >
           ⋯
@@ -93,7 +93,7 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
                 setShowConfirm(true);
                 setShowMenu(false);
               }}
-              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:text-red-700 rounded transition-colors"
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:text-red-700 hover:cursor-pointer rounded transition-colors"
             >
               Delete
             </button>
