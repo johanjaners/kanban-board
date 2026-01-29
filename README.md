@@ -82,8 +82,7 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 -   Repository Pattern
 -   DTO Pattern & Mapping
 -   CORS configured for Azure deployment
--   Authentication (Clerk JWT)
--   Authorization
+-   Authentication & Authorization (Clerk JWT)
 
 ---
 
