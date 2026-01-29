@@ -8,7 +8,7 @@ export function About() {
       <div className="bg-white rounded-lg shadow-md p-8 space-y-6">
         <section>
           <p className="text-gray-700 leading-relaxed font-medium">
-            Full-stack Kanban application demonstrating user-scoped data isolation and automated cloud deployment. 
+            Full-stack Kanban application demonstrating user-scoped data ownership and automated cloud deployment. 
             Built to validate end-to-end integration across a distributed architecture.
           </p>
         </section>
@@ -23,7 +23,8 @@ export function About() {
                 <li>Entity Framework Core</li>
                 <li>PostgreSQL</li>
                 <li>Repository Pattern</li>
-                <li>JWT-based Data Isolation</li>
+                <li>Clerk JWT Authentication</li>
+                <li>User-scoped Data Ownership</li>
               </ul>
             </div>
             <div>
