@@ -7,7 +7,7 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 ## 🚀 Live Demo
 
 -   **Frontend:** [Azure Static Web Apps](https://brave-cliff-0698b8403.3.azurestaticapps.net/)
--   **Backend API:** [Azure App Service](https://your-backend-url.azurewebsites.net)
+-   **Backend API:** [Azure App Service](https://kanban-board-api-fpd0akbzhgb8d7ey.westeurope-01.azurewebsites.net/swagger/)
 
 ---
 
@@ -55,7 +55,7 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 ![Kanban Board](screenshots/kanban-board.png)
 
 **Additional Views:**
--   [Tasks List View](screenshots/tasks-list.png)
+-   [Tasks List View](screenshots/task-list.png)
 -   [Mobile View](screenshots/mobile.png)
 -   [Create Task Modal](screenshots/create-task.png)
 
@@ -164,6 +164,7 @@ Frontend runs at `http://localhost:5173`
 **Frontend** (`frontend/.env`):
 ```
 VITE_API_URL=https://localhost:5001
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key_here
 ```
 
 **Backend** (`backend/KanbanBoard.Api/appsettings.json`):
@@ -172,6 +173,10 @@ VITE_API_URL=https://localhost:5001
     "ConnectionStrings": {
         "DefaultConnection": "your-postgresql-connection-string"
     }
+    "Clerk": {
+    "Authority": "https://clerk.your-domain.com",
+    "Audience": null
+  }
 }
 ```
 
