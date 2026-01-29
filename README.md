@@ -55,7 +55,7 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 ![Kanban Board](screenshots/kanban-board.png)
 
 **Additional Views:**
--   [Tasks List View](screenshots/tasks-list.png)
+-   [Tasks List View](screenshots/task-list.png)
 -   [Mobile View](screenshots/mobile.png)
 -   [Create Task Modal](screenshots/create-task.png)
 
