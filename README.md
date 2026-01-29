@@ -7,7 +7,7 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 ## 🚀 Live Demo
 
 -   **Frontend:** [Azure Static Web Apps](https://brave-cliff-0698b8403.3.azurestaticapps.net/)
--   **Backend API:** [Azure App Service]((https://kanban-board-api-fpd0akbzhgb8d7ey.westeurope-01.azurewebsites.net/swagger/index.html))
+-   **Backend API:** [Azure App Service](https://kanban-board-api-fpd0akbzhgb8d7ey.westeurope-01.azurewebsites.net/swagger/)
 
 ---
 
