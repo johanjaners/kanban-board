@@ -17,7 +17,7 @@ export function About() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Tech Stack & Patterns</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2 text-blue-700">Backend Core</h3>
+              <h3 className="font-semibold text-gray-800 mb-2">Backend Core</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-1">
                 <li>.NET 9 Web API</li>
                 <li>Entity Framework Core</li>
@@ -27,7 +27,7 @@ export function About() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2 text-blue-700">Frontend & UX</h3>
+              <h3 className="font-semibold text-gray-800 mb-2">Frontend & UX</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-1">
                 <li>React / TypeScript / Vite</li>
                 <li>Tailwind CSS</li>
