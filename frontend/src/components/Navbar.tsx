@@ -22,7 +22,7 @@ export function Navbar() {
                             About
                         </NavLink>
                     </div>
-                    <div>
+                    <div className="flex items-center">
                         <UserButton />
                     </div>
                 </div>
