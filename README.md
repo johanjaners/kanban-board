@@ -1,6 +1,6 @@
 # Kanban Board
 
-A Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, deployed on **Azure** with automated CI/CD.
+A Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, secured with **Clerk**, deployed on **Azure** with automated CI/CD.
 
 ---
 
@@ -20,13 +20,16 @@ kanban-board/
 │   └── KanbanBoard.Api/
 │       ├── Controllers/
 │       ├── Data/
+│       ├── Mappings/
+│       ├── Migrations/
 │       ├── Models/
-│       └── Migrations/
+│       └── Repositories/
 ├── frontend/
 │   └── src/
 │       ├── components/
 │       ├── pages/
-│       └── services/
+│       ├── services/
+│       └── types/
 └── screenshots/
 ```
 
@@ -42,6 +45,7 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 -   **Frontend:** Azure Static Web Apps
 -   **Backend:** Azure App Service
 -   **Database:** Neon PostgreSQL
+-   **Security:** Clerk JWT
 -   **CI/CD:** GitHub Actions (automated deployment on push to `main`)
 
 ---
@@ -63,9 +67,11 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 
 -   React with TypeScript
 -   Vite
+-   Clerk React
 -   Tailwind CSS
 -   React Router
--   Responsive design (cards on mobile, table on desktop)
+-   Responsive design (cards on mobile, table on desktop) 
+-   Toastify notifications
 
 ### Backend
 
@@ -73,7 +79,11 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 -   Entity Framework Core
 -   PostgreSQL (Neon)
 -   RESTful CRUD API
+-   Repository Pattern
+-   DTO Pattern & Mapping
 -   CORS configured for Azure deployment
+-   Authentication (Clerk JWT)
+-   Authorization
 
 ---
 
