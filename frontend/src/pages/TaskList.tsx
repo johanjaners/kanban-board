@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import type { TaskItem } from '../types/Task';
 import { TaskCard } from '../components/TaskCard';
+import { EditTaskModal } from '../components/EditTaskModal';
 import { useAuth } from '@clerk/clerk-react';
+import { toast } from 'react-toastify';
 
 const statusNames = ['To Do', 'In Progress', 'Done'];
 
@@ -16,6 +18,7 @@ const getPriorityLabel = (priority?: number) => {
 export function TaskList() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingTask, setEditingTask] = useState<TaskItem | null>(null);
   const { getToken } = useAuth();
 
   const fetchTasks = async () => {
@@ -46,9 +49,10 @@ export function TaskList() {
       });
       
       fetchTasks();
+      toast.success('Task status updated!');
     } catch (error) {
       console.error('Failed to update task status:', error);
-      alert('Failed to update task status');
+      toast.error('Failed to update task status');
     }
   };
 
@@ -59,9 +63,17 @@ export function TaskList() {
 
       await api.deleteTask(token, taskId);
       fetchTasks();
+      toast.success('Task deleted successfully!');
     } catch (error) {
       console.error('Failed to delete task:', error);
-      alert('Failed to delete task');
+      toast.error('Failed to delete task');
+    }
+  };
+
+  const handleEdit = (taskId: number) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (task) {
+      setEditingTask(task);
     }
   };
 
@@ -142,6 +154,7 @@ export function TaskList() {
             task={task}
             onStatusChange={handleStatusChange}
             onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         ))}
         
@@ -151,6 +164,13 @@ export function TaskList() {
           </div>
         )}
       </div>
+
+      <EditTaskModal
+        task={editingTask}
+        isOpen={!!editingTask}
+        onClose={() => setEditingTask(null)}
+        onTaskUpdated={fetchTasks}
+      />
     </div>
   );
 }
