@@ -6,9 +6,10 @@ type TaskCardProps = {
   task: TaskItem;
   onStatusChange: (taskId: number, newStatus: number) => void;
   onDelete: (taskId: number) => void;
+  onEdit: (taskId: number) => void;
 };
 
-export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
+export function TaskCard({ task, onStatusChange, onDelete, onEdit }: TaskCardProps) {
   const [showMenu, setShowMenu] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -88,6 +89,15 @@ export function TaskCard({ task, onStatusChange, onDelete }: TaskCardProps) {
         
         {showMenu && (
           <div className="absolute right-0 mt-1 bg-slate-200 border border-gray-300 rounded shadow-lg z-10">
+            <button
+              onClick={() => {
+                onEdit(task.id);
+                setShowMenu(false);
+              }}
+              className="block w-full text-left px-4 py-2 text-sm text-blue-600 hover:text-blue-700 hover:cursor-pointer transition-colors"
+            >
+              Edit
+            </button>
             <button
               onClick={() => {
                 setShowConfirm(true);
