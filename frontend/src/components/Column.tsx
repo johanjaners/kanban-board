@@ -7,9 +7,10 @@ type ColumnProps = {
   status: number;
   onStatusChange: (taskId: number, newStatus: number) => void;
   onDelete: (taskId: number) => void;
+  onEdit: (taskId: number) => void;
 };
 
-export function Column({ title, tasks, status, onStatusChange, onDelete }: ColumnProps) {
+export function Column({ title, tasks, status, onStatusChange, onDelete, onEdit }: ColumnProps) {
   const filteredTasks = tasks.filter(task => task.status === status);
 
   const getTopBorderColor = () => {
@@ -43,6 +44,7 @@ export function Column({ title, tasks, status, onStatusChange, onDelete }: Colum
               task={task}
               onStatusChange={onStatusChange}
               onDelete={onDelete}
+              onEdit={onEdit}
             />
           ))
         )}
