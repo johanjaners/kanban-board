@@ -83,7 +83,6 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 - RESTful CRUD API
 - Repository Pattern & DTO Mapping
 - Clerk JWT Authentication
-- User-scoped data ownership
 
 ---
 
@@ -94,6 +93,7 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
     - Tasks List View
     - About Page
 - Create tasks with modal form
+- Edit tasks with modal form
 - Delete tasks with confirmation modal
 - Update task status via dropdown
 - Priority & Due Date tracking

@@ -24,7 +24,6 @@ export function About() {
                 <li>PostgreSQL</li>
                 <li>Repository Pattern</li>
                 <li>Clerk JWT Authentication</li>
-                <li>User-scoped Data Ownership</li>
               </ul>
             </div>
             <div>
