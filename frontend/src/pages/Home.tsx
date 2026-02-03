@@ -3,12 +3,14 @@ import { api } from '../services/api';
 import type { TaskItem } from '../types/Task';
 import { Board } from '../components/Board';
 import { TaskForm } from '../components/TaskForm';
+import { EditTaskModal } from '../components/EditTaskModal';
 import { useAuth } from '@clerk/clerk-react';
 import { toast } from 'react-toastify';
 
 export function Home() {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingTask, setEditingTask] = useState<TaskItem | null>(null);
   const { getToken } = useAuth();
 
   const fetchTasks = async () => {
@@ -61,6 +63,13 @@ export function Home() {
     }
   };
 
+  const handleEdit = (taskId: number) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (task) {
+      setEditingTask(task);
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -84,6 +93,14 @@ export function Home() {
         tasks={tasks} 
         onStatusChange={handleStatusChange}
         onDelete={handleDelete}
+        onEdit={handleEdit}
+      />
+
+      <EditTaskModal
+        task={editingTask}
+        isOpen={!!editingTask}
+        onClose={() => setEditingTask(null)}
+        onTaskUpdated={fetchTasks}
       />
     </div>
   );
