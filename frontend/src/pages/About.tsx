@@ -8,8 +8,8 @@ export function About() {
       <div className="bg-white rounded-lg shadow-md p-8 space-y-6">
         <section>
           <p className="text-gray-700 leading-relaxed font-medium">
-            Full-stack Kanban application demonstrating user-scoped data ownership and automated cloud deployment. 
-            Built to validate end-to-end integration across a distributed architecture.
+            Full-stack Kanban application with automated cloud deployment, 
+            built to validate end-to-end integration across a distributed architecture.
           </p>
         </section>
 
