@@ -11,44 +11,31 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 
 ---
 
-## 🏗️ Architecture
-
-### Project Structure
-
-```
-kanban-board/
-├── backend/
-│   └── KanbanBoard.Api/
-│       ├── Controllers/
-│       ├── Data/
-│       ├── Mappings/
-│       ├── Migrations/
-│       ├── Models/
-│       └── Repositories/
-├── frontend/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── services/
-│       └── types/
-└── screenshots/
-```
-
-### Deployment Architecture
-
-```
-GitHub → Actions → Azure Static Web Apps (Frontend)
-                → Azure App Service (Backend)
-                → Neon PostgreSQL (Database)
-```
-
-### Infrastructure
+## 🏗️ Infrastructure
 
 - **Frontend:** Azure Static Web Apps
 - **Backend:** Azure App Service
 - **Database:** Neon PostgreSQL
 - **Security:** Clerk JWT
 - **CI/CD:** GitHub Actions (automated deployment on push to `main`)
+
+---
+
+## 🛠️ Tech Stack
+
+**Backend:** ASP.NET Web API (.NET 9), Entity Framework Core, PostgreSQL (Neon), RESTful API, Repository Pattern  
+**Frontend:** React, TypeScript, Vite, Tailwind CSS, React Router  
+**Auth:** Clerk (JWT)  
+
+---
+
+## 📦 Features
+
+- Create, update, delete tasks
+- Status management (Kanban board view)
+- Priority and due date tracking
+- Responsive UI
+- Secure user authentication
 
 ---
 
@@ -62,52 +49,6 @@ GitHub → Actions → Azure Static Web Apps (Frontend)
 - [Mobile View](screenshots/mobile.png)
 - [Create Task Modal](screenshots/create-task.png)
 - [About Page](screenshots/about.png)
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- React with TypeScript
-- Vite
-- Clerk React
-- Tailwind CSS
-- React Router
-
-### Backend
-
-- ASP.NET Web API (.NET 9)
-- Entity Framework Core
-- PostgreSQL (Neon)
-- RESTful CRUD API
-- Repository Pattern & DTO Mapping
-- Clerk JWT Authentication
-
----
-
-## 📦 Features
-
-- Multi-page application
-    - Kanban Board (Home)
-    - Tasks List View
-    - About Page
-- Create tasks with modal form
-- Edit tasks with modal form
-- Delete tasks with confirmation modal
-- Update task status via dropdown
-- Priority & Due Date tracking
-- Responsive UI
-
----
-
-## 🧭 Pages
-
-| Page             | Route    | Description                                                   |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| **Kanban Board** | `/`      | Visual workflow with three columns (To Do, In Progress, Done) |
-| **Tasks List**   | `/tasks` | Table view of all tasks                                       |
-| **About**        | `/about` | Project information and tech stack                            |
 
 ---
 
