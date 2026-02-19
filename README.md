@@ -63,22 +63,6 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 
 ---
 
-## 🗄️ Database Schema
-
-**TaskItem Model:**
-
-- `id` (int) - Primary key
-- `userId` (string) - Clerk User ID (Owner)
-- `title` (string) - Task title
-- `description` (string) - Optional description
-- `status` (int) - 0=To Do, 1=In Progress, 2=Done
-- `priority` (int) - 1-2=Low, 3-4=Medium, 5=High
-- `dueDate` (DateTime) - Optional due date
-- `createdAt` (DateTime) - Creation timestamp
-- `updatedAt` (DateTime) - Last update timestamp
-
----
-
 ## ⚙️ Running Locally
 
 ### Backend
