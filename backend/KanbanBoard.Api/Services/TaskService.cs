@@ -6,6 +6,7 @@ using KanbanBoard.Api.Services;
 public class TaskService(ITaskRepository repository) : ITaskService
 {
     private readonly ITaskRepository _repository = repository;
+
     public async Task<IEnumerable<TaskResponseDto>> GetAllAsync(string userId)
     {
         var tasks = await _repository.GetAllAsync(userId);
@@ -17,6 +18,7 @@ public class TaskService(ITaskRepository repository) : ITaskService
         var task = await _repository.GetByIdAsync(id, userId);
         return task?.ToResponseDto();
     }
+
     public async Task<TaskResponseDto> CreateAsync(TaskCreateDto dto, string userId)
     {
         var task = dto.ToEntity(userId);
@@ -25,6 +27,7 @@ public class TaskService(ITaskRepository repository) : ITaskService
 
         return task.ToResponseDto();
     }
+
     public async Task<TaskResponseDto?> UpdateAsync(int id, TaskUpdateDto dto, string userId)
     {
         var task = await _repository.GetByIdAsync(id, userId);
@@ -36,6 +39,7 @@ public class TaskService(ITaskRepository repository) : ITaskService
 
         return task.ToResponseDto();
     }
+
     public async Task<TaskResponseDto?> DeleteAsync(int id, string userId)
     {
         var task = await _repository.GetByIdAsync(id, userId);
@@ -45,5 +49,4 @@ public class TaskService(ITaskRepository repository) : ITaskService
 
         return task.ToResponseDto();
     }
-
 }
