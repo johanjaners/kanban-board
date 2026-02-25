@@ -32,10 +32,10 @@ public class TasksController(ITaskService service) : ControllerBase
         var userId = GetUserId();
         if (userId is null) return Unauthorized();
 
-        var dto = await _service.GetByIdAsync(id, userId);
-        if (dto is null) return NotFound();
+        var task = await _service.GetByIdAsync(id, userId);
+        if (task is null) return NotFound();
 
-        return Ok(dto);
+        return Ok(task);
     }
 
     [HttpPost]
