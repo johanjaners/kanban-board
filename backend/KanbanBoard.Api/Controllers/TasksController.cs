@@ -2,6 +2,7 @@ using System.Security.Claims;
 using KanbanBoard.Api.Mappings;
 using KanbanBoard.Api.Models;
 using KanbanBoard.Api.Repositories;
+using KanbanBoard.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,65 +11,65 @@ namespace KanbanBoard.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class TasksController(ITaskRepository repository) : ControllerBase
+public class TasksController(ITaskService service) : ControllerBase
 {
-    private readonly ITaskRepository _repository = repository;
-    private string CurrentUserId => User.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                                    ?? throw new UnauthorizedAccessException("User ID missing.");
+    private readonly ITaskService _service = service;
+    private string? GetUserId() =>
+        User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskResponseDto>>> GetAll()
     {
-        var tasks = await _repository.GetAllAsync(CurrentUserId);
+        var userId = GetUserId();
+        if (userId is null) return Unauthorized();
 
-        var dtos = tasks.Select(t => t.ToResponseDto());
-
-        return Ok(dtos);
+        return Ok(await _service.GetAllAsync(userId));
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TaskResponseDto>> GetById(int id)
     {
-        var task = await _repository.GetByIdAsync(id, CurrentUserId);
+        var userId = GetUserId();
+        if (userId is null) return Unauthorized();
 
+        var task = await _service.GetByIdAsync(id, userId);
         if (task is null) return NotFound();
 
-        return Ok(task.ToResponseDto());
+        return Ok(task);
     }
 
     [HttpPost]
     public async Task<ActionResult<TaskResponseDto>> Create([FromBody] TaskCreateDto dto)
     {
-        var task = dto.ToEntity(CurrentUserId);
+        var userId = GetUserId();
+        if (userId is null) return Unauthorized();
 
-        await _repository.AddAsync(task);
+        var created = await _service.CreateAsync(dto, userId);
 
-        return CreatedAtAction(nameof(GetById), new { id = task.Id }, task.ToResponseDto());
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult<TaskResponseDto>> Update(int id, [FromBody] TaskUpdateDto dto)
     {
-        var task = await _repository.GetByIdAsync(id, CurrentUserId);
+        var userId = GetUserId();
+        if (userId is null) return Unauthorized();
 
-        if (task is null) return NotFound();
+        var updated = await _service.UpdateAsync(id, dto, userId);
+        if (updated is null) return NotFound();
 
-        dto.UpdateEntity(task);
-
-        await _repository.UpdateAsync(task);
-
-        return Ok(task.ToResponseDto());
+        return Ok(updated);
     }
 
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<TaskResponseDto>> Delete(int id)
     {
-        var task = await _repository.GetByIdAsync(id, CurrentUserId);
+        var userId = GetUserId();
+        if (userId is null) return Unauthorized();
 
-        if (task is null) return NotFound();
+        var deleted = await _service.DeleteAsync(id, userId);
+        if (deleted is null) return NotFound();
 
-        await _repository.DeleteAsync(task);
-
-        return Ok(task.ToResponseDto());
+        return Ok(deleted);
     }
 }
