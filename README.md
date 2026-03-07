@@ -25,7 +25,7 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 
 **Backend:** ASP.NET Web API (.NET 9), Entity Framework Core, PostgreSQL (Neon), RESTful API, Repository Pattern  
 **Frontend:** React, TypeScript, Vite, Tailwind CSS, React Router  
-**Auth:** Clerk (JWT)  
+**Auth:** Clerk (JWT)
 
 ---
 
@@ -47,7 +47,6 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 
 - [Tasks List View](screenshots/task-list.png)
 - [Mobile View](screenshots/mobile.png)
-- [Create Task Modal](screenshots/create-task.png)
 - [About Page](screenshots/about.png)
 
 ---
