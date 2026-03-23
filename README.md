@@ -1,6 +1,6 @@
 # Kanban Board
 
-A Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, **Tailwind CSS**, and **PostgreSQL**, secured with **Clerk**, deployed on **Azure** with automated CI/CD.
+A Kanban board application built with **ASP.NET Web API**, **React + TypeScript**, and **PostgreSQL**, secured with **Clerk**, deployed on **Azure** with automated CI/CD.
 
 ---
 
