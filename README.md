@@ -10,8 +10,29 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 - **Backend API:** [Azure App Service](https://kanban-board-api-fpd0akbzhgb8d7ey.westeurope-01.azurewebsites.net/swagger/)
 
 ---
+## 🏗️ Architecture
 
-## 🏗️ Infrastructure
+### Project Structure
+
+```
+kanban-board/
+├── backend/
+│   └── KanbanBoard.Api/
+│       ├── Controllers/
+│       ├── Data/
+│       ├── Mappings/
+│       ├── Migrations/
+│       ├── Models/
+│       └── Repositories/
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── services/
+│       └── types/
+└── screenshots/
+```
+### Infrastructure
 
 - **Frontend:** Azure Static Web Apps
 - **Backend:** Azure App Service
@@ -42,12 +63,6 @@ A Kanban board application built with **ASP.NET Web API**, **React + TypeScript*
 ## 📸 Screenshots
 
 ![Kanban Board](screenshots/kanban-board.png)
-
-**Additional Views:**
-
-- [Tasks List View](screenshots/task-list.png)
-- [Mobile View](screenshots/mobile.png)
-- [About Page](screenshots/about.png)
 
 ---
 
