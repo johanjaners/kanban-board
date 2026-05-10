@@ -11,6 +11,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [status, setStatus] = useState(0);
   const [priority, setPriority] = useState<number | ''>('');
   const [dueDate, setDueDate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,7 +34,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
       await api.createTask(token, {
         title: title.trim(),
         description: description.trim() || undefined,
-        status: 0, // Always create in Todo
+        status,
         priority: priority === '' ? undefined : Number(priority),
         dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
       });
@@ -41,6 +42,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
       // Reset form
       setTitle('');
       setDescription('');
+      setStatus(0);
       setPriority('');
       setDueDate('');
       setIsOpen(false);
@@ -59,6 +61,7 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
   const handleCancel = () => {
     setTitle('');
     setDescription('');
+    setStatus(0);
     setPriority('');
     setDueDate('');
     setIsOpen(false);
@@ -148,6 +151,24 @@ export function TaskForm({ onTaskCreated }: TaskFormProps) {
               disabled={isSubmitting}
             />
           </div>
+        </div>
+
+        {/* Status */}
+        <div>
+          <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+            Status
+          </label>
+          <select
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(Number(e.target.value))}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={isSubmitting}
+          >
+            <option value={0}>Todo</option>
+            <option value={1}>In Progress</option>
+            <option value={2}>Done</option>
+          </select>
         </div>
 
         {/* Buttons */}
